@@ -17,7 +17,37 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from tasks.views import (
+    CurrentUserView,
+    PasswordResetConfirmView,
+    PasswordResetRequestView,
+    ProjectViewSet,
+    RegisterView,
+    SubtaskViewSet,
+    TodoViewSet,
+    email_exists,
+)
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+from django.urls import include
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+router.register(r'todos', TodoViewSet, basename='todo')
+router.register(r'projects', ProjectViewSet, basename='project')
+router.register(r'subtasks', SubtaskViewSet, basename='subtask')
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/register/", RegisterView.as_view(), name="register"),
+    path("api/me/", CurrentUserView.as_view(), name="current_user"),
+    path("api/email-exists/", email_exists, name="email_exists"),
+    path("api/password-reset/", PasswordResetRequestView.as_view(), name="password_reset"),
+    path("api/password-reset-confirm/", PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path("api/", include(router.urls)),
 ]
