@@ -133,7 +133,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'todo_app_db',
         'USER': 'todo_user',
-        'PASSWORD': 'Jackboy@12',
+        'PASSWORD': '***REMOVED_LOCAL_DB_PASSWORD***',
         'HOST': 'localhost',
         'PORT': '5432',
     }
