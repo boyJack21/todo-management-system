@@ -521,24 +521,24 @@ export default {
     },
     async fetchUser() {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/me/", this.getAuthHeader());
+        const response = await axios.get("/api/me/", this.getAuthHeader());
         this.user = response.data;
       } catch (err) {
         this.handleRequestError(err, "Unable to load user details.");
       }
     },
     async fetchProjects() {
-      const response = await axios.get("http://127.0.0.1:8000/api/projects/", this.getAuthHeader());
+      const response = await axios.get("/api/projects/", this.getAuthHeader());
       this.projects = response.data;
     },
     async fetchTodos() {
-      const response = await axios.get("http://127.0.0.1:8000/api/todos/", this.getAuthHeader());
+      const response = await axios.get("/api/todos/", this.getAuthHeader());
       this.todos = response.data;
     },
     async addProject() {
       try {
         await axios.post(
-          "http://127.0.0.1:8000/api/projects/",
+          "/api/projects/",
           { name: this.newProjectName, color: this.newProjectColor },
           this.getAuthHeader()
         );
@@ -552,7 +552,7 @@ export default {
     async addTodo() {
       try {
         await axios.post(
-          "http://127.0.0.1:8000/api/todos/",
+          "/api/todos/",
           {
             title: this.newTodo,
             notes: this.newNotes,
@@ -582,7 +582,7 @@ export default {
     },
     async saveTodo({ todo, payload }) {
       try {
-        await axios.patch(`http://127.0.0.1:8000/api/todos/${todo.id}/`, payload, this.getAuthHeader());
+        await axios.patch(`/api/todos/${todo.id}/`, payload, this.getAuthHeader());
         await this.fetchTodos();
         this.recordActivity("updated", `Updated ${payload.title}`);
         this.showToast("Task updated", "success");
@@ -601,7 +601,7 @@ export default {
     },
     async deleteTodo(todo) {
       try {
-        await axios.delete(`http://127.0.0.1:8000/api/todos/${todo.id}/`, this.getAuthHeader());
+        await axios.delete(`/api/todos/${todo.id}/`, this.getAuthHeader());
         await this.fetchTodos();
         this.recordActivity("deleted", `Deleted ${todo.title}`);
         this.showToast("Task deleted", "success");
@@ -612,7 +612,7 @@ export default {
     async addSubtask({ todo, title }) {
       try {
         await axios.post(
-          "http://127.0.0.1:8000/api/subtasks/",
+          "/api/subtasks/",
           { todo: todo.id, title },
           this.getAuthHeader()
         );
@@ -624,7 +624,7 @@ export default {
     async toggleSubtask(subtask) {
       try {
         await axios.patch(
-          `http://127.0.0.1:8000/api/subtasks/${subtask.id}/`,
+          `/api/subtasks/${subtask.id}/`,
           { completed: !subtask.completed },
           this.getAuthHeader()
         );

@@ -74,7 +74,7 @@ export default {
 
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/password-reset-confirm/",
+          "/api/password-reset-confirm/",
           {
             uid: this.$route.params.uid,
             token: this.$route.params.token,

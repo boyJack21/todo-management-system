@@ -83,7 +83,7 @@ export default {
 
       try {
         const res = await axios.get(
-          "http://127.0.0.1:8000/api/email-exists/",
+          "/api/email-exists/",
           {
             params: { email: this.email },
           }
@@ -114,7 +114,7 @@ export default {
     async login() {
       try {
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/token/",
+          "/api/token/",
           {
             username: this.email,
             password: this.password,
@@ -142,7 +142,7 @@ export default {
     async register() {
       try {
         await axios.post(
-          "http://127.0.0.1:8000/api/register/",
+          "/api/register/",
           {
             username: this.email,
             email: this.email,
